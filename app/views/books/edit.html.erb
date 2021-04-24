@@ -1,0 +1,39 @@
+<main>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
+        <h1>Editing Book</h1>
+
+        <div id="error_explanation" class="text-danger">
+          <% if @book.errors.any? %>
+          <h3><%= @book.errors.count %>error prohibited this obj from being saved:</h3>
+          <% @book.errors.full_messages.each do |message| %>
+          <ul>
+            <li><%= message %></li>
+          </ul>
+            <% end %>
+          <% end %>
+        </div>
+
+        <%= form_with model:@book, local: true do |f| %>
+          <div class="form-group">
+            <label for="inputTitle">title</label>
+            <%= f.text_field :title, autofocus: true, id:"inputTitle", class: "form-control" %>
+          </div>
+          <div class="form-group">
+            <label for="inputOpinion">opinion</label>
+            <%= f.text_area :body, id:"inputOpinion", class: "form-control" %>
+          </div>
+          <div class="form-group">
+            <%= f.submit "Update Book", class: "btn btn-success" %>
+          </div>
+          <div class="d-flex p-2 bd-highlight">
+          <%= link_to "Show", book_path(@book.id), class: "d-inline-flex p-2 bd-highlight" %>
+          <p class="d-inline-flex p-2 bd-highlight">|</p>
+          <%= link_to "Back", books_path, class: "d-inline-flex p-2 bd-highlight" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</main>
